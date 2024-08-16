@@ -567,18 +567,24 @@ function addon:OpenCandyOptions(frame, broker)
 		{
 			text = string.format("Candy Options: |cffffffff%s|r", broker), isTitle = true, notCheckable = true,
 		},
+
+		-- Show tooltip on hover
 		{
 			text = "Show tooltip on hover",
 			func = function() candyBar.data.showTooltip = not candyBar.data.showTooltip; end,
 			checked = function() return candyBar.data.showTooltip; end,
 			isNotRadio = true,
 		},
+
+		-- Make click-through
 		{
 			text = "Make click-through",
 			func = function() candyBar.data.isClickthrough = not candyBar.data.isClickthrough; end,
 			checked = function() return candyBar.data.isClickthrough; end,
 			isNotRadio = true,
 		},
+
+		-- Show icon
 		{
 			text = "Show icon",
 			func = function()
@@ -592,6 +598,8 @@ function addon:OpenCandyOptions(frame, broker)
 			checked = function() return candyBar.data.showIcon; end,
 			isNotRadio = true,
 		},
+
+		-- Show text
 		{
 			text = "Show text",
 			func = function()
@@ -605,6 +613,8 @@ function addon:OpenCandyOptions(frame, broker)
 			checked = function() return candyBar.data.showText; end,
 			isNotRadio = true,
 		},
+
+		-- Force white text color
 		{
 			text = "Force white text color",
 			func = function()
@@ -613,9 +623,12 @@ function addon:OpenCandyOptions(frame, broker)
 			checked = function() return candyBar.data.stripColor; end,
 			isNotRadio = true,
 		},
+
 		{
 			text = " ", isTitle = true, notCheckable = true,
 		},
+
+		-- Lua text filter
 		{
 			text = "Lua text filter",
 			func = function()
@@ -627,9 +640,12 @@ function addon:OpenCandyOptions(frame, broker)
 			checked = function() return candyBar.data.luaTextFilter ~= nil; end,
 			isNotRadio = true,
 		},
+
 		{
 			text = " ", isTitle = true, notCheckable = true,
 		},
+
+		-- Width options
 		{
 			text = "|cffffd100Width options|r",
 			notCheckable = true,
@@ -638,6 +654,8 @@ function addon:OpenCandyOptions(frame, broker)
 				{
 					text = "Width options", isTitle = true, notCheckable = true,
 				},
+
+				-- Dynamic width
 				{
 					text = "|cffffd100Dynamic width|r (fit to text)",
 					func = function()
@@ -647,6 +665,8 @@ function addon:OpenCandyOptions(frame, broker)
 					end,
 					checked = function() return candyBar.data.fixedWidth == 0; end,
 				},
+
+				-- Use fixed width
 				{
 					text = fixedWidthLabel,
 					func = function()
@@ -660,6 +680,8 @@ function addon:OpenCandyOptions(frame, broker)
 				},
 			},
 		},
+
+		-- Background color
 		{
 			text = "Background color",
 			extraInfo = "very",
@@ -685,110 +707,155 @@ function addon:OpenCandyOptions(frame, broker)
 			opacity = 1 - (candyBar.data.backgroundColor[4] or 0),
 			notCheckable = true,
 		},
+
 		{
 			text = " ", isTitle = true, notCheckable = true,
 		},
+
+		-- Visibility options
 		{
 			text = "|cffffd100Visiblity Options|r",
 			notCheckable = true,
 			hasArrow = true,
 			menuList = {
+
+				-- Combat Status
 				{
 					text = "Combat Status", isTitle = true, notCheckable = true,
 				},
+
+				-- Show in and out of combat
 				{
 					text = "Show in and out of combat",
 					func = function() candyBar.data.visibility.mode = E.VISIBILITY_ALWAYS; end,
 					checked = function() return candyBar.data.visibility.mode == E.VISIBILITY_ALWAYS; end,
 				},
+
+				-- Show only in combat
 				{
 					text = "Show only in combat",
 					func = function() candyBar.data.visibility.mode = E.VISIBILITY_IN_COMBAT; end,
 					checked = function() return candyBar.data.visibility.mode == E.VISIBILITY_IN_COMBAT; end,
 				},
+
+				-- Show only out of combat
 				{
 					text = "Show only out of combat",
 					func = function() candyBar.data.visibility.mode = E.VISIBILITY_OUT_OF_COMBAT; end,
 					checked = function() return candyBar.data.visibility.mode == E.VISIBILITY_OUT_OF_COMBAT; end,
 				},
+
 				{
 					text = " ", isTitle = true, notCheckable = true,
 				},
+
+				-- Instance Status
 				{
 					text = "Instance Status", isTitle = true, notCheckable = true,
 				},
+
+				-- Show everywhere
 				{
 					text = "Show everywhere",
 					func = function() candyBar.data.visibility.instanceMode = E.INSTANCEMODE_EVERYWHERE; end,
 					checked = function() return candyBar.data.visibility.instanceMode == E.INSTANCEMODE_EVERYWHERE; end,
 				},
+
+				-- Show only while in instances
 				{
 					text = "Show only while in instances",
 					func = function() candyBar.data.visibility.instanceMode = E.INSTANCEMODE_INSIDE; end,
 					checked = function() return candyBar.data.visibility.instanceMode == E.INSTANCEMODE_INSIDE; end,
 				},
+
+				-- Do not show while in instances
 				{
 					text = "Do not show while in instances",
 					func = function() candyBar.data.visibility.instanceMode = E.INSTANCEMODE_OUTSIDE; end,
 					checked = function() return candyBar.data.visibility.instanceMode == E.INSTANCEMODE_OUTSIDE; end,
 				},
+
 				{
 					text = " ", isTitle = true, notCheckable = true,
 				},
+
+				-- Group Status
 				{
 					text = "Group Status", isTitle = true, notCheckable = true,
 				},
+
+				-- Show always
 				{
 					text = "Show always",
 					func = function() candyBar.data.visibility.groupMode = E.GROUPMODE_ALWAYS; end,
 					checked = function() return candyBar.data.visibility.groupMode == E.GROUPMODE_ALWAYS; end,
 				},
+
+				-- Only when solo
 				{
 					text = "Only when solo",
 					func = function() candyBar.data.visibility.groupMode = E.GROUPMODE_SOLO; end,
 					checked = function() return candyBar.data.visibility.groupMode == E.GROUPMODE_SOLO; end,
 				},
+
+				-- Only when in party or raid
 				{
 					text = "Only when in party or raid",
 					func = function() candyBar.data.visibility.groupMode = E.GROUPMODE_INPARTY; end,
 					checked = function() return candyBar.data.visibility.groupMode == E.GROUPMODE_INPARTY; end,
 				},
+
 				{
 					text = " ", isTitle = true, notCheckable = true,
 				},
+
+				-- Show only when holding
 				{
 					text = "Show only when holding", isTitle = true, notCheckable = true,
 				},
+
+				-- CTRL
 				{
 					text = "CTRL",
 					func = function() candyBar.data.visibility.showCtrl = not candyBar.data.visibility.showCtrl; end,
 					checked = function() return candyBar.data.visibility.showCtrl; end,
 					isNotRadio = true,
 				},
+
+				-- SHIFT
 				{
 					text = "SHIFT",
 					func = function() candyBar.data.visibility.showShift = not candyBar.data.visibility.showShift; end,
 					checked = function() return candyBar.data.visibility.showShift; end,
 					isNotRadio = true,
 				},
+
+				-- ALT
 				{
 					text = "ALT",
 					func = function() candyBar.data.visibility.showAlt = not candyBar.data.visibility.showAlt; end,
 					checked = function() return candyBar.data.visibility.showAlt; end,
 					isNotRadio = true,
 				},
+
 				{
 					text = " ", isTitle = true, notCheckable = true,
 				},
+
+				-- Miscellaneous
 				{
 					text = "Miscellaneous", isTitle = true, notCheckable = true,
 				},
+
+				-- Hide when pet battling
 				{
 					text = "Hide when pet battling",
 					func = function() candyBar.data.visibility.hideInPetBattle = not candyBar.data.visibility.hideInPetBattle; end,
 					checked = function() return candyBar.data.visibility.hideInPetBattle; end,
 					isNotRadio = true,
 				},
+
+				-- Custom Lua condition
 				{
 					text = "Custom Lua condition",
 					func = function()
@@ -802,9 +869,12 @@ function addon:OpenCandyOptions(frame, broker)
 				},
 			},
 		},
+
 		{
 			text = " ", isTitle = true, notCheckable = true,
 		},
+
+		-- Font Size
 		{
 			text = string.format("|cffffd100Font Size:|r %d", candyBar.data.fontSize),
 			notCheckable = true,
@@ -829,14 +899,19 @@ function addon:OpenCandyOptions(frame, broker)
 				return fontSizeMenu;
 			end)(),
 		},
+
+		-- Font Outline
 		{
 			text = string.format("|cffffd100Font Outline:|r %s", candyBar.data.fontOutline or "None"),
 			notCheckable = true,
 			hasArrow = true,
 			menuList = {
+				-- Font Outline
 				{
 					text = "Font Outline", isTitle = true, notCheckable = true,
 				},
+
+				-- None
 				{
 					text = "None",
 					func = function()
@@ -844,6 +919,8 @@ function addon:OpenCandyOptions(frame, broker)
 					end,
 					checked = function() return candyBar.data.fontOutline == nil; end,
 				},
+
+				-- Thin Outline
 				{
 					text = "Thin Outline",
 					func = function()
@@ -851,6 +928,8 @@ function addon:OpenCandyOptions(frame, broker)
 					end,
 					checked = function() return candyBar.data.fontOutline == "OUTLINE"; end,
 				},
+
+				-- Thick Outline
 				{
 					text = "Thick Outline",
 					func = function()
@@ -860,14 +939,19 @@ function addon:OpenCandyOptions(frame, broker)
 				},
 			},
 		},
+
+		-- Justify Text
 		{
 			text = string.format("|cffffd100Justify Text:|r %s", candyBar.data.justify),
 			notCheckable = true,
 			hasArrow = true,
 			menuList = {
+				-- Justify Text
 				{
 					text = "Justify Text", isTitle = true, notCheckable = true,
 				},
+
+				-- Left
 				{
 					text = "Left",
 					func = function()
@@ -875,6 +959,8 @@ function addon:OpenCandyOptions(frame, broker)
 					end,
 					checked = function() return candyBar.data.justify == "LEFT"; end,
 				},
+
+				-- Center
 				{
 					text = "Center",
 					func = function()
@@ -882,6 +968,8 @@ function addon:OpenCandyOptions(frame, broker)
 					end,
 					checked = function() return candyBar.data.justify == "CENTER"; end,
 				},
+
+				-- Right
 				{
 					text = "Right",
 					func = function()
@@ -891,15 +979,20 @@ function addon:OpenCandyOptions(frame, broker)
 				},
 			},
 		},
+
+		-- Frame Strata
 		{
 			text = string.format("|cffffd100Frame Strata:|r %s", candyBar.data.frameStrata),
 			notCheckable = true,
 			hasArrow = true,
 			menuList = frameStrataMenu,
 		},
+
 		{
 			text = " ", isTitle = true, notCheckable = true,
 		},
+
+		-- Remove Candy Bar
 		{
 			text = "Remove Candy Bar",
 			func = function() addon:RemoveCandy(candyBar.broker); end,
