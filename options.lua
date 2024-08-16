@@ -538,7 +538,6 @@ function addon:OpenCandyOptions(frame, broker)
 	local candyBar, module = addon:GetCandy(broker);
 
 	MenuUtil.CreateContextMenu(frame, function(ownerRegion, rootDescription)
-
 		rootDescription:CreateTitle(string.format("Candy Options: |cffffffff%s|r", broker));
 
 		-- Show tooltip on hover
@@ -610,10 +609,9 @@ function addon:OpenCandyOptions(frame, broker)
 
 		-- Width options
 		local widthOptionsMenu = rootDescription:CreateButton("|cffffd100Width options|r");
-
 		widthOptionsMenu:CreateTitle("Width options");
 
-				-- Dynamic width
+		-- Dynamic width
 		widthOptionsMenu:CreateRadio(
 			"|cffffd100Dynamic width|r (fit to text)",
 			function() return candyBar.data.fixedWidth == 0; end,
@@ -624,7 +622,7 @@ function addon:OpenCandyOptions(frame, broker)
 			end
 		);
 
-				-- Use fixed width
+		-- Use fixed width
 		local fixedWidthLabel = "|cffffd100Use fixed width|r";
 		if (candyBar.data.fixedWidth > 0) then
 			fixedWidthLabel = string.format("|cffffd100Use fixed width|r (currently %d pixels)", candyBar.data.fixedWidth);
@@ -673,24 +671,21 @@ function addon:OpenCandyOptions(frame, broker)
 		-- Visibility options
 		local visibilityOptionsMenu = rootDescription:CreateButton("|cffffd100Visiblity Options|r");
 
-				-- Combat Status
+		-- Combat Status
 		visibilityOptionsMenu:CreateTitle("Combat Status");
-
-				-- Show in and out of combat
+		-- Show in and out of combat
 		visibilityOptionsMenu:CreateRadio(
 			"Show in and out of combat",
 			function() return candyBar.data.visibility.mode == E.VISIBILITY_ALWAYS; end,
 			function() candyBar.data.visibility.mode = E.VISIBILITY_ALWAYS; end
 		);
-
-				-- Show only in combat
+		-- Show only in combat
 		visibilityOptionsMenu:CreateRadio(
 			"Show only in combat",
 			function() return candyBar.data.visibility.mode == E.VISIBILITY_IN_COMBAT; end,
 			function() candyBar.data.visibility.mode = E.VISIBILITY_IN_COMBAT; end
 		);
-
-				-- Show only out of combat
+		-- Show only out of combat
 		visibilityOptionsMenu:CreateRadio(
 			"Show only out of combat",
 			function() return candyBar.data.visibility.mode == E.VISIBILITY_OUT_OF_COMBAT; end,
@@ -699,24 +694,21 @@ function addon:OpenCandyOptions(frame, broker)
 
 		visibilityOptionsMenu:CreateSpacer();
 
-				-- Instance Status
+		-- Instance Status
 		visibilityOptionsMenu:CreateTitle("Instance Status");
-
-				-- Show everywhere
+		-- Show everywhere
 		visibilityOptionsMenu:CreateRadio(
 			"Show everywhere",
 			function() return candyBar.data.visibility.instanceMode == E.INSTANCEMODE_EVERYWHERE; end,
 			function() candyBar.data.visibility.instanceMode = E.INSTANCEMODE_EVERYWHERE; end
 		);
-
-				-- Show only while in instances
+		-- Show only while in instances
 		visibilityOptionsMenu:CreateRadio(
 			"Show only while in instances",
 			function() return candyBar.data.visibility.instanceMode == E.INSTANCEMODE_INSIDE; end,
 			function() candyBar.data.visibility.instanceMode = E.INSTANCEMODE_INSIDE; end
 		);
-
-				-- Do not show while in instances
+		-- Do not show while in instances
 		visibilityOptionsMenu:CreateRadio(
 			"Do not show while in instances",
 			function() return candyBar.data.visibility.instanceMode == E.INSTANCEMODE_OUTSIDE; end,
@@ -725,24 +717,21 @@ function addon:OpenCandyOptions(frame, broker)
 
 		visibilityOptionsMenu:CreateSpacer();
 
-				-- Group Status
+		-- Group Status
 		visibilityOptionsMenu:CreateTitle("Group Status");
-
-				-- Show always
+		-- Show always
 		visibilityOptionsMenu:CreateRadio(
 			"Show always",
 			function() return candyBar.data.visibility.groupMode == E.GROUPMODE_ALWAYS; end,
 			function() candyBar.data.visibility.groupMode = E.GROUPMODE_ALWAYS; end
 		);
-
-				-- Only when solo
+		-- Only when solo
 		visibilityOptionsMenu:CreateRadio(
 			"Only when solo",
 			function() return candyBar.data.visibility.groupMode == E.GROUPMODE_SOLO; end,
 			function() candyBar.data.visibility.groupMode = E.GROUPMODE_SOLO; end
 		);
-
-				-- Only when in party or raid
+		-- Only when in party or raid
 		visibilityOptionsMenu:CreateRadio(
 			"Only when in party or raid",
 			function() return candyBar.data.visibility.groupMode == E.GROUPMODE_INPARTY; end,
@@ -751,24 +740,21 @@ function addon:OpenCandyOptions(frame, broker)
 
 		visibilityOptionsMenu:CreateSpacer();
 
-				-- Show only when holding
+		-- Show only when holding
 		visibilityOptionsMenu:CreateTitle("Show only when holding");
-
-				-- CTRL
+		-- CTRL
 		visibilityOptionsMenu:CreateCheckbox(
 			"CTRL",
 			function() return candyBar.data.visibility.showCtrl; end,
 			function() candyBar.data.visibility.showCtrl = not candyBar.data.visibility.showCtrl; end
 		);
-
-				-- SHIFT
+		-- SHIFT
 		visibilityOptionsMenu:CreateCheckbox(
 			"SHIFT",
 			function() return candyBar.data.visibility.showShift; end,
 			function() candyBar.data.visibility.showShift = not candyBar.data.visibility.showShift; end
 		);
-
-				-- ALT
+		-- ALT
 		visibilityOptionsMenu:CreateCheckbox(
 			"ALT",
 			function() return candyBar.data.visibility.showAlt; end,
@@ -777,17 +763,15 @@ function addon:OpenCandyOptions(frame, broker)
 
 		visibilityOptionsMenu:CreateSpacer();
 
-				-- Miscellaneous
+		-- Miscellaneous
 		visibilityOptionsMenu:CreateTitle("Miscellaneous");
-
-				-- Hide when pet battling
+		-- Hide when pet battling
 		visibilityOptionsMenu:CreateCheckbox(
 			"Hide when pet battling",
 			function() return candyBar.data.visibility.hideInPetBattle; end,
 			function() candyBar.data.visibility.hideInPetBattle = not candyBar.data.visibility.hideInPetBattle; end
 		);
-
-				-- Custom Lua condition
+		-- Custom Lua condition
 		visibilityOptionsMenu:CreateCheckbox(
 			"Custom Lua condition",
 			function() return candyBar.data.visibility.customLua ~= nil; end,
@@ -813,13 +797,10 @@ function addon:OpenCandyOptions(frame, broker)
 				end
 			);
 		end
-
 		-- Font Outline
 		local fontOutlineMenu = rootDescription:CreateButton(string.format("|cffffd100Font Outline:|r %s", candyBar.data.fontOutline or "None"));
-				-- Font Outline
 		fontOutlineMenu:CreateTitle("Font Outline");
-
-				-- None
+		-- None
 		fontOutlineMenu:CreateRadio(
 			"None",
 			function() return candyBar.data.fontOutline == nil; end,
@@ -827,8 +808,7 @@ function addon:OpenCandyOptions(frame, broker)
 				candyBar.data.fontOutline = nil; addon:UpdateCandyText(candyBar.broker); CloseMenus();
 			end
 		);
-
-				-- Thin Outline
+		-- Thin Outline
 		fontOutlineMenu:CreateRadio(
 			"Thin Outline",
 			function() return candyBar.data.fontOutline == "OUTLINE"; end,
@@ -836,8 +816,7 @@ function addon:OpenCandyOptions(frame, broker)
 				candyBar.data.fontOutline = "OUTLINE"; addon:UpdateCandyText(candyBar.broker); CloseMenus();
 			end
 		);
-
-				-- Thick Outline
+		-- Thick Outline
 		fontOutlineMenu:CreateRadio(
 			"Thick Outline",
 			function() return candyBar.data.fontOutline == "THICKOUTLINE"; end,
@@ -848,10 +827,8 @@ function addon:OpenCandyOptions(frame, broker)
 
 		-- Justify Text
 		local justifyTextMenu = rootDescription:CreateButton(string.format("|cffffd100Justify Text:|r %s", candyBar.data.justify));
-				-- Justify Text
 		justifyTextMenu:CreateTitle("Justify Text");
-
-				-- Left
+		-- Left
 		justifyTextMenu:CreateRadio(
 			"Left",
 			function() return candyBar.data.justify == "LEFT"; end,
@@ -859,8 +836,7 @@ function addon:OpenCandyOptions(frame, broker)
 				addon:ChangeJustify(candyBar, "LEFT"); CloseMenus();
 			end
 		);
-
-				-- Center
+		-- Center
 		justifyTextMenu:CreateRadio(
 			"Center",
 			function() return candyBar.data.justify == "CENTER"; end,
@@ -868,8 +844,7 @@ function addon:OpenCandyOptions(frame, broker)
 				addon:ChangeJustify(candyBar, "CENTER"); CloseMenus();
 			end
 		);
-
-				-- Right
+		-- Right
 		justifyTextMenu:CreateRadio(
 			"Right",
 			function() return candyBar.data.justify == "RIGHT"; end,
@@ -898,6 +873,5 @@ function addon:OpenCandyOptions(frame, broker)
 			"Remove Candy Bar",
 			function() addon:RemoveCandy(candyBar.broker); end
 		);
-
 	end);
 end
